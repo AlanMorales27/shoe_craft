@@ -41,10 +41,18 @@ const loader = new GLTFLoader();
 loader.load(
 	'../source/models/Trainer.glb',
 	function(gltf){
-		scene.add(gltf.scene);
-		gltf.scene.scale.set(.2,.2,.2);
+		const model = gltf.scene;
+
+		scene.add(model);
+		model.scale.set(.2,.2,.2);
+
+		//Access to choe parts
+		const node1 = model.children[0].children[1];
+		console.log(node1);
+		node1.material.color.set(0x0000ff);
 	}
 )
+
 
 function animate() {
 

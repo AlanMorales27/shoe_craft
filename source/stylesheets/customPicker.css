@@ -1,0 +1,20 @@
+.customPicker{
+  width: 60vw;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  top: 50%;
+
+
+}
+
+  .customPicker button{
+    width: 10em;
+    height: 10em;
+    cursor: pointer;
+  }
+
+
