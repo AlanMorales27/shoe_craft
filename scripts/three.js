@@ -3,6 +3,16 @@ import * as THREE from 'three';
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls';
 import  { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader';
 
+const blueBtn = document.getElementById("blue");
+var color1 = 0xffffff;
+
+blueBtn.onclick = () => {
+	console.log("entra");
+	color1 = "#000000";
+
+	changeColor(color1);
+}
+
 //Scene config
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -36,8 +46,9 @@ controls.enableDamping = true; //Give smoothing
 controls.maxDistance = 2;
 camera.position.z = 5;
 
-// Loader
 const loader = new GLTFLoader();
+function changeColor(color){
+
 loader.load(
 	'../source/models/Trainer.glb',
 	function(gltf){
@@ -48,10 +59,14 @@ loader.load(
 
 		//Access to choe parts
 		const node1 = model.children[0].children[1];
-		console.log(node1);
-		node1.material.color.set(0x0000ff);
+		node1.material.color.set(color);
+		
 	}
 )
+}
+// Loader
+
+changeColor(color1);
 
 
 function animate() {
