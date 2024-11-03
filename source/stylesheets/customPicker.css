@@ -3,20 +3,40 @@
   display: flex;
   position: absolute;
   justify-content: space-between;
-  right: 0;
-  bottom: 0;
   left: 50%;
-  top: 50%;
-
-
+  top: 70%;
+  transform: translate(-50%,50%);
 }
 
   .customPicker button{
     width: 10em;
     height: 10em;
     cursor: pointer;
-    background-color: aqua;
+    border: none;
   }
+
+    #blue{
+      background-color: blue;
+    }
+
+    #red{
+      background-color: red;
+    }
+
+    #green{
+      background-color: green;
+    }
+
+    #black{
+      background-color: black;
+    }
+
+    #white{
+      background-color: white;
+      border: 1px solid black;
+    }
+
+
 
   
 

@@ -6,18 +6,22 @@ import  { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoad
 class ThreeScene{
 	constructor(){
 		// Scene
-		this.render;
+		this.renderer;
 		this.camera;
 		this.scene;
 
 		this.controls;
 		this.model = null;
 
+		this.chargeScene();
+		this.loadModel();
+		this.animate();
+	}
+
+	chargeScene(){
 		this.initScene();
 		this.initLights();
 		this.initControls();
-		this.loadModel("#000000");
-		this.animate();
 	}
 
 	initScene(){
@@ -26,11 +30,10 @@ class ThreeScene{
 			this.camera.position.z = 5;
 		this.renderer = new THREE.WebGLRenderer
 			({
-				alpha: false,
+				alpha: true,
 				antialias: true,
 			});
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
-		this.renderer.setAnimationLoop( this.animate() );
 		document.body.appendChild( this.renderer.domElement );
 	}
 	
@@ -57,7 +60,6 @@ class ThreeScene{
 		this.controls.maxDistance = 2;
 	}
 
-
 	loadModel(color){
 		const loader = new GLTFLoader();
 		loader.load(
@@ -74,7 +76,6 @@ class ThreeScene{
 				}
 			)
 	}
-
 
 	animate = () => {
 		requestAnimationFrame(this.animate);

@@ -1,5 +1,3 @@
-import { call } from "three/webgpu";
-
 class ButtonManager{
     constructor(button,callBack){
         this.color = "#ffffff";
@@ -17,7 +15,6 @@ class ButtonManager{
     onButtonclicked(){
         let color = this.getColor;
         this.button.onclick = () => {
-            console.log(this.getColor);
             this.callBack(color);
         }
     }
