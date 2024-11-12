@@ -2,6 +2,7 @@ import * as THREE from 'three';
 // Import addons
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls';
 import  { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader';
+import { vectorComponents } from 'three/webgpu';
 
 class ThreeScene{
 	constructor(){
@@ -10,12 +11,18 @@ class ThreeScene{
 		this.camera;
 		this.scene;
 
+		//Raycast
+		this.raycast = new THREE.Raycaster;
+		this.mause = new THREE.Vector2;
+		this.intersect;
+
 		this.controls;
 		this.model = null;
 
 		this.chargeScene();
 		this.loadModel();
 		this.animate();
+		this.initRaycast();
 	}
 
 	chargeScene(){
@@ -77,9 +84,20 @@ class ThreeScene{
 			)
 	}
 
+	initRaycast(){
+			window.addEventListener('mousemove', (event) => {
+				this.mause.x = (event.clientX / window.innerWidth)*2 - 1;
+				this.mause.y = - (event.clientY / window.innerHeight)*2 + 1;
+			});
+	}
+
 	animate = () => {
 		requestAnimationFrame(this.animate);
 		this.renderer.render( this.scene, this.camera );
+
+		this.raycast.setFromCamera(this.mause,this.camera);	
+		this.intersect = this.raycast.intersectObjects(this.scene.children);
+		console.log(this.intersect);
 
 		if (this.controls) {
 			this.controls.update();
