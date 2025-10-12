@@ -7,6 +7,13 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
 
+    /* Path aliases for app code */
+    "baseUrl": "src",
+    "paths": {
+      "@models/*": ["three/models/*"],
+      "@scenes/*": ["three/scenes/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
