@@ -7,7 +7,6 @@ export default function ShoeModel() {
 
   const { scene } = useGLTF("/sneeker.glb");
   const [hovered, setHovered] = useState<string | null>(null);
-  const [originalColor, setOriginalColor] = useState<string | null>(null);
 
   /**
    * Set shadows in the each mesh of the model
@@ -19,23 +18,29 @@ export default function ShoeModel() {
     }
   })
 
+  /**
+   * Handle pointer over
+   * @param e - event of pointer over
+   */
   const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
 
     const mesh = e.object as Mesh;
     const material = mesh.material as MeshStandardMaterial;
+    const baseColor = material.color.clone(); 
 
-    if(!originalColor) {
-      setOriginalColor(material.color.getStyle());
-    }
+    material.emissive.copy(baseColor);      
+    material.emissiveIntensity = 0.1;    
 
-    material.color.set(0xff0000)
     setHovered(e.object.name)
-
     document.body.style.cursor = 'pointer'
     console.log(hovered)
   }
 
+  /**
+   * Handle pointer out
+   * @param e - event of pointer out
+   */
   const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setHovered(null)
@@ -43,9 +48,9 @@ export default function ShoeModel() {
 
     const mesh = e.object as Mesh;
     const material = mesh.material as MeshStandardMaterial;
-    if(originalColor) {
-      material.color.set(originalColor)
-    }
+    
+    material.emissive.set(0x000000)
+    material.emissiveIntensity = 0
   }
   
   return (
