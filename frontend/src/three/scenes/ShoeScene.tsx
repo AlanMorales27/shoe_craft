@@ -5,9 +5,19 @@ import { OrbitControls } from "@react-three/drei";
 
 export default function ShoeScene() {
   return (
-    <Canvas>
+    <Canvas shadows>
       <Suspense fallback={null  }>
-        <ambientLight intensity={2}/>
+        {/* Lights */}
+        <ambientLight 
+          intensity={1} 
+          color={0xffffff}
+          castShadow
+        />
+        <directionalLight 
+          position={[3, 1, 1]} 
+          intensity={4}
+          castShadow
+        />
         <ShoeModel />
         {/* User controls */}
         <OrbitControls enableZoom={false} enablePan={false} />
