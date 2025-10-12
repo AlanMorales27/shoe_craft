@@ -11,7 +11,6 @@ export default function ShoeScene() {
         <ambientLight 
           intensity={1} 
           color={0xffffff}
-          castShadow
         />
         <directionalLight 
           position={[3, 1, 1]} 
