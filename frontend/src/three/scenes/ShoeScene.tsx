@@ -6,11 +6,11 @@ import { OrbitControls } from "@react-three/drei";
 export default function ShoeScene() {
   return (
     <Canvas>
-      <Suspense fallback={<span>Cargando Modelo...</span>}>
+      <Suspense fallback={null  }>
         <ambientLight intensity={2}/>
         <ShoeModel />
         {/* User controls */}
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Suspense>
     </Canvas>
   );
