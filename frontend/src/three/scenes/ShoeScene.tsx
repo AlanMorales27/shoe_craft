@@ -5,7 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 
 export default function ShoeScene() {
   return (
-    <Canvas shadows>
+    <Canvas className="bg-rose-50" shadows>
       <Suspense fallback={null  }>
         {/* Lights */}
         <ambientLight 
