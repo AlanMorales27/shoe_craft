@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { ShoeContext } from "@context/ShoeContext";
 
 export default function ShoeModel() {
-
   /** Context to communicate with the floating bar */
   const context = useContext(ShoeContext);
 
@@ -16,21 +15,30 @@ export default function ShoeModel() {
   /** State to keep track of the hovered mesh */
   const [hovered, setHovered] = useState<string | null>(null);
 
+  /** Stores the selected part of the shoe */
+  const [selected, setSelected] = useState<string | null>(null);
+
   /**
-   * 
+   * Use effect to change the color of the model according to the context
+   * of the  floating bar
    */
+
   useEffect(() => {
     scene.traverse((node: Object3D) => {
-      if(context?.color != null) {
+      if (context?.color != null) {
         const child = node as Mesh;
-        if (child.isMesh && child.material instanceof MeshStandardMaterial) {
-          const baseColor = new Color(context.color)
-          child.material.color.copy(baseColor)
-          child.material.needsUpdate = true
+        if (
+          child.isMesh &&
+          child.material instanceof MeshStandardMaterial &&
+          child.name === selected
+        ) {
+          const baseColor = new Color(context.color);
+          child.material.color.copy(baseColor);
+          child.material.needsUpdate = true;
         }
       }
-    })
-  }, [scene, context?.color])
+    });
+  }, [context?.color]);
 
   /**
    * Set shadows in the each mesh of the model
@@ -40,7 +48,7 @@ export default function ShoeModel() {
       node.castShadow = true;
       node.receiveShadow = true;
     }
-  })
+  });
 
   /**
    * Handle pointer over
@@ -51,15 +59,15 @@ export default function ShoeModel() {
 
     const mesh = e.object as Mesh;
     const material = mesh.material as MeshStandardMaterial;
-    const baseColor = material.color.clone(); 
+    const baseColor = material.color.clone();
 
-    material.emissive.copy(baseColor);      
-    material.emissiveIntensity = 0.1;    
+    material.emissive.copy(baseColor);
+    material.emissiveIntensity = 0.1;
 
-    setHovered(e.object.name)
-    document.body.style.cursor = 'pointer'
-    console.log(hovered)
-  }
+    setHovered(e.object.name);
+    document.body.style.cursor = "pointer";
+    console.log("Hovered: " + hovered);
+  };
 
   /**
    * Handle pointer out
@@ -67,24 +75,35 @@ export default function ShoeModel() {
    */
   const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    setHovered(null)
-    document.body.style.cursor = 'default'
+    setHovered(null);
+    document.body.style.cursor = "default";
 
     const mesh = e.object as Mesh;
     const material = mesh.material as MeshStandardMaterial;
-    
-    material.emissive.set(0x000000)
-    material.emissiveIntensity = 0
-  }
-  
+
+    material.emissive.set(0x000000);
+    material.emissiveIntensity = 0;
+  };
+
+  /**
+   * Handle click
+   * @param e - event of click
+   */
+  const handleClick = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    setSelected(e.object.name);
+    console.log("Selected: " + e.object.name);
+  };
+
   return (
-    <primitive 
+    <primitive
       object={scene}
       scale={15}
       position={[0, -1, 0]}
       rotation={[0, 1.5, 0]}
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}
+      onClick={handleClick}
     />
-  )
+  );
 }

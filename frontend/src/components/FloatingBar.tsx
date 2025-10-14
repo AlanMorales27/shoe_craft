@@ -16,6 +16,15 @@ export default function FloatingBar() {
     {color: 'red'}
   ];
 
+  /**
+   * Handle color change
+   * @param color - color to change
+   */
+  const handleColorChange = (color: string) => {
+    context?.setColor(null);
+    setTimeout(() => context?.setColor(color), 5);
+  };
+
   return (
     <div className="absolute bottom-5 left-[50%] translate-x-[-50%] w-[70vw] h-20 bg-gray-50 rounded-lg border-[1px] shadow">
       <div className="flex items-center gap-1">
@@ -23,7 +32,7 @@ export default function FloatingBar() {
           <button className="w-7 h-7 rounded-full shadow-sm"
             key={index}  
             style={{ backgroundColor: color.color }}
-            onClick={() => context?.setColor(color.color)}
+            onClick={() => handleColorChange(color.color)}
           >
           </button>
         ))}

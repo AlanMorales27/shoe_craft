@@ -6,11 +6,10 @@
 import { useState } from "react";
 import { ShoeContext } from "./ShoeContext";
 
-export const ShoeContextProvider = ({
-  children,
-}: {
+export const ShoeContextProvider = ({children}: {
   children: React.ReactNode;
 }) => {
+  /** State to keep track of the color of the model */
   const [color, setColor] = useState<string | null>(null);
 
   return (
