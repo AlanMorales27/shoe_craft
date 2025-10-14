@@ -9,6 +9,9 @@ export default defineConfig({
     alias: {
       '@models': path.resolve(__dirname, 'src/three/models'),
       '@scenes': path.resolve(__dirname, 'src/three/scenes'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@context': path.resolve(__dirname, 'src/context'),
     },
   },
 })
