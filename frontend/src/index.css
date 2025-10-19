@@ -1,6 +1,10 @@
-@import "./assets/styles/reset.css";
+
+*{  user-select: none }
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import "./assets/styles/reset.css";
+ 

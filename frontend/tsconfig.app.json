@@ -19,7 +19,10 @@
       "@scenes/*": ["three/scenes/*"],
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
-      "@context/*": ["context/*"]
+      "@context/*": ["context/*"],
+      "@assets/*": ["assets/*"],
+      "@constants/*": ["constants/*"],
+      "@types/*": ["types/*"],
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
