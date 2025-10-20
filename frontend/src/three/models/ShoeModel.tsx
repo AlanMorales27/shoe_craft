@@ -12,9 +12,6 @@ export default function ShoeModel() {
   /** Load the model*/
   const { scene } = useGLTF("/sneeker.glb");
 
-  /** State to keep track of the hovered mesh */
-  const [hovered, setHovered] = useState<string | null>(null);
-
   /** Stores the selected part of the shoe */
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -22,7 +19,6 @@ export default function ShoeModel() {
    * Use effect to change the color of the model according to the context
    * of the  floating bar
    */
-
   useEffect(() => {
     scene.traverse((node: Object3D) => {
       if (context?.color != null) {
@@ -64,9 +60,9 @@ export default function ShoeModel() {
     material.emissive.copy(baseColor);
     material.emissiveIntensity = 0.1;
 
-    setHovered(e.object.name);
+    context?.setHoveredMesh(e.object.name);
+
     document.body.style.cursor = "pointer";
-    console.log("Hovered: " + hovered);
   };
 
   /**
@@ -75,7 +71,7 @@ export default function ShoeModel() {
    */
   const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    setHovered(null);
+
     document.body.style.cursor = "default";
 
     const mesh = e.object as Mesh;
@@ -83,6 +79,8 @@ export default function ShoeModel() {
 
     material.emissive.set(0x000000);
     material.emissiveIntensity = 0;
+
+    context?.setHoveredMesh(null);
   };
 
   /**
@@ -90,9 +88,11 @@ export default function ShoeModel() {
    * @param e - event of click
    */
   const handleClick = (e: ThreeEvent<PointerEvent>) => {
+
     e.stopPropagation();
     setSelected(e.object.name);
-    console.log("Selected: " + e.object.name);
+
+    context?.setSelectedMesh(e.object.name);
   };
 
   return (

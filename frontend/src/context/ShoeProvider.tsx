@@ -11,9 +11,17 @@ export const ShoeContextProvider = ({children}: {
 }) => {
   /** State to keep track of the color of the model */
   const [color, setColor] = useState<string | null>(null);
+  /** State of the hovered mesh */
+  const [hoveredMesh, setHoveredMesh] = useState<string | null>(null);
+  /** State of the selected mesh */
+  const [selectedMesh, setSelectedMesh] = useState<string | null>(null);
 
   return (
-    <ShoeContext.Provider value={{ color, setColor }}>
+    <ShoeContext.Provider value={{ 
+      color, setColor, 
+      hoveredMesh, setHoveredMesh, 
+      selectedMesh, setSelectedMesh 
+    }}>
       {children}
     </ShoeContext.Provider>
   );
