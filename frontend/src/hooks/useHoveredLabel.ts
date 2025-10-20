@@ -24,7 +24,7 @@ export function useHoveredLabel(): HoveredLabelData {
 
   if(context?.hoveredMesh){
     return {
-      text: normalizedText,
+      text: 'Viendo: ' + normalizedText,
       className: `${baseText} text-gray-500`
     };
   }
