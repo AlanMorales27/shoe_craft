@@ -1,6 +1,7 @@
 
 *{  user-select: none }
 
+:root{ font-size: 28px }
 
 @tailwind base;
 @tailwind components;
